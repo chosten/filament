@@ -91,17 +91,23 @@ trait CanReorderRecords
         return (bool) $this->evaluate($this->isReorderAuthorized);
     }
 
-    public function callBeforeReorderCallback(): void
+    /**
+     * @param  array<int | string>  $order
+     */
+    public function callBeforeReorderCallback(array $order): void
     {
         if ($this->beforeReorderCallback !== null) {
-            $this->evaluate($this->beforeReorderCallback);
+            $this->evaluate($this->beforeReorderCallback, ['order' => $order]);
         }
     }
 
-    public function callAfterReorderCallback(): void
+    /**
+     * @param  array<int | string>  $order
+     */
+    public function callAfterReorderCallback(array $order): void
     {
         if ($this->afterReorderCallback !== null) {
-            $this->evaluate($this->afterReorderCallback);
+            $this->evaluate($this->afterReorderCallback, ['order' => $order]);
         }
     }
 }

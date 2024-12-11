@@ -18,7 +18,7 @@ trait CanReorderRecords
             return;
         }
 
-        $this->getTable()->callBeforeReorderCallback();
+        $this->getTable()->callBeforeReorderCallback($order);
 
         $orderColumn = (string) str($this->getTable()->getReorderColumn())->afterLast('.');
 
@@ -51,7 +51,7 @@ trait CanReorderRecords
                 ]);
         });
 
-        $this->getTable()->callAfterReorderCallback();
+        $this->getTable()->callAfterReorderCallback($order);
     }
 
     public function toggleTableReordering(): void
